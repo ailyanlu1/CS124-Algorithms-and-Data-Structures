@@ -1,0 +1,24 @@
+Last login: Sun Feb 26 18:48:19 on ttys004
+Matts-MacBook-Pro-10:~ Matt$ cd Desktop/
+Matts-MacBook-Pro-10:Desktop Matt$ make test1
+cc     test1.c   -o test1
+Matts-MacBook-Pro-10:Desktop Matt$ ./test1 0 16 10 4
+6.203696 16 10 4
+10.267516 32 10 4
+17.053518 64 10 4
+28.464367 128 10 4
+47.145477 256 10 4
+78.498344 512 10 4
+Vertex 62 was not part of the MST
+Vertex 316 was not part of the MST
+129.121155 1024 8 4
+215.954666 2048 10 4
+Vertex 2183 was not part of the MST
+361.273834 4096 9 4
+604.566101 8192 5 4
+1008.472534 16384 5 4
+1689.557373 32768 5 4
+2828.068359 65536 5 4
+^C
+Matts-MacBook-Pro-10:Desktop Matt$ 
+

@@ -1,0 +1,25 @@
+Avg. weight, Avg. largest edge, numpoints, numtrials, dimension: 
+1.202448, 0.000340, 32768, 100, 0
+Time elapsed: 15930.108398
+
+Avg. weight, Avg. largest edge, numpoints, numtrials, dimension: 
+117.474861, 0.011333, 32768, 100, 2
+Time elapsed: 65814.992188
+
+Avg. weight, Avg. largest edge, numpoints, numtrials, dimension: 
+668.631042, 0.049643, 32768, 100, 3
+Time elapsed: 35088.140625
+
+Avg. weight, Avg. largest edge, numpoints, numtrials, dimension: 
+668.631042, 0.049643, 65536, 5, 2
+Time elapsed: 35088.140625
+
+65536 vertices in 2d takes almost exactly 3600 seconds
+166.089401+166.037079+166.020035+166.087265+166.2499+166.162201 -> 166.107
+
++ 166.077286 + 166.386627 + 166.123535
+
+131072 1 0
+1.200512
+4273.897 seconds
+

@@ -1,0 +1,34 @@
+import math
+def T(n):
+	if n <= 1:
+		return 0
+	elif n == 2:
+		return 1
+	else:
+		return T(math.ceil(n/2.0)) + T(math.floor(n/2.0)) + n - 1
+
+def map(f,n):
+	for i in range(2,n+1):
+		print i, "\t", f(i), "\t", f(i) - f(i - 1)
+
+
+def lg(x):
+	return math.log(x) / math.log(2)
+
+def T_iter(n):
+	total = 0
+	for i in range(1,n+1):
+		total += math.ceil(lg(i))
+	return total
+
+def T_explicit(n):
+	return math.ceil(lg(n)) * (n - 2 ** (math.ceil(lg(n)) -1)) + (math.ceil(lg(n))-2)* 2 ** (math.ceil(lg(n))-1)+1
+
+
+Fill up a minheap with the first k elements (insertions take logk time) of the list
+while we haven't added the last element of the list to the heap: 
+delete the min and then add the next element in the list
+repeat until we've reached the end of the list
+once we've reached the end of the least, empty the heap, element by element
+
+

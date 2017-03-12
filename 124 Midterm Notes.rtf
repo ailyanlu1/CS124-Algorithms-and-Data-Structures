@@ -1,0 +1,23 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl280\partightenfactor0
+
+\f0\fs24 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 f(n) \uc0\u8804  cg(n) \'97> f = O(g)\
+lim_[n\'97>inf] f/g = 0 \'97> f = o(g)\
+\
+\
+\
+\
+If DFS is started at a vertex v, then it will get stuck and restarted precisely when all vertices in the SCC of v, and in all the SCC\'92s that are reachable from the SCC of v, are visited. Consequently, if DFS is started at a vertex of a sink SCC (a SCC that has no edges leaving it in the DAG of SCC\'92s), then it will get stuck after it visits 3-8 precisely the vertices of this SCC.\
+\
+The vertex with the highest postorder number in DFS (that is, the vertex where the DFS ends) belongs to a source SCC.\
+\
+The vertex with the smallest postorder number in a DFS 
+\b does not necessarily belong
+\b0  to a sink SCC\
+\
+}
