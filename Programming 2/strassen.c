@@ -59,8 +59,8 @@ int main(int argc, char* argv[]){
 	free(line);
 	fclose(file);
 
-	print_matrix(dim, dim, a);
-	print_matrix(dim, dim, b);
+	//print_matrix(dim, dim, a);
+	//print_matrix(dim, dim, b);
 
 	int* c = strassen(dim, dim, a, dim, dim, b);
 	if(c == NULL){
@@ -70,8 +70,6 @@ int main(int argc, char* argv[]){
 		free(c);
 		return 1;
 	}
-	print_matrix(dim, dim, c);
-
 	int n = 10;
 	while(n < 10000){
 		float trad_time = timer(n, 10, &traditional_square);
@@ -104,13 +102,12 @@ int* add(int a_row, int a_col, int* a,
 		return NULL;
 	}
 
-	int* c = malloc(a_row * a_col * sizeof(int));
 	for(int i = 0; i < a_row; i++){
 		for(int j = 0; j < a_col; j++){
-			*(c + i * a_row + j) = subtract ? *(a + i * a_row + j) - *(b + i * a_row + j): *(a + i * a_row + j) + *(b + i * a_row + j);
+			*(a + i * a_row + j) = subtract ? *(a + i * a_row + j) - *(b + i * a_row + j): *(a + i * a_row + j) + *(b + i * a_row + j);
 		}
 	}
-	return c;
+	return a;
 }
 
 int* add_square(int d, int* a, int* b){
@@ -158,13 +155,6 @@ int* strassen(int a_row, int a_col, int* a, int b_row, int b_col, int* b){
 	}
 
 	int tmp = a_row;
-	/*while(tmp / 2.0 == tmp >> 1 && tmp > 0){
-		tmp = tmp / 2;
-	}
-	if(tmp != 1){
-		printf("Strassen currently needs dimensions to be power of 2\n");
-		return NULL;
-	}*/
 
 	if(a_row <= cross_over){
 		int* c = traditional_square(a_row, a, b);
@@ -215,58 +205,39 @@ int* strassen(int a_row, int a_col, int* a, int b_row, int b_col, int* b){
 			}
 		}
 	}
+	
+	sub_square(d, F, H);
+	int* P1 = strassen(d, d, A, d, d, F);
 
-	int* tmp1;
-	int* tmp2;
+	add_square(d, A, B);
+	int* P2 = strassen(d, d, A, d, d, H);
 
-	tmp1 = sub_square(d, F, H);
-	int* P1 = strassen(d, d, A, d, d, tmp1);
-	free(tmp1);
+	add_square(d, C, D);
+	int* P3 = strassen(d, d, C, d, d, E);
 
-	tmp1 = add_square(d, A, B);
-	int* P2 = strassen(d, d, tmp1, d, d, H);
-	free(tmp1);
+	sub_square(d, G, E);
+	int* P4 = strassen(d, d, D, d, d, G);
 
-	tmp1 = add_square(d, C, D);
-	int* P3 = strassen(d, d, tmp1, d, d, E);
-	free(tmp1);
+	sub_square(d, A, B);
+	add_square(d, A, D);
+	add_square(d, E, H);
+	int* P5 = strassen(d, d, A, d, d, E);
 
-	tmp1 = sub_square(d, G, E);
-	int* P4 = strassen(d, d, D, d, d, tmp1);
-	free(tmp1);
+	sub_square(d, B, D);
+	add_square(d, G, E); 
+	int* P6 = strassen(d, d, B, d, d, G);
 
-	tmp1 = add_square(d, A, D);
-	tmp2 = add_square(d, E, H);
-	int* P5 = strassen(d, d, tmp1, d, d, tmp2);
-	free(tmp1);
-	free(tmp2);
-
-	tmp1 = sub_square(d, B, D);
-	tmp2 = add_square(d, G, H); 
-	int* P6 = strassen(d, d, tmp1, d, d, tmp2);
-	free(tmp1);
-	free(tmp2);
-
-	tmp1 = sub_square(d, A, C);
-	tmp2 = add_square(d, E, F);
-	int* P7 = strassen(d, d, tmp1, d, d, tmp2);
-	free(tmp1);
-	free(tmp2);
-
-	tmp1 = add_square(d, P5, P4);
-	tmp2 = sub_square(d, tmp1, P2);
-	int* top_left = add_square(d, tmp2, P6);
-	free(tmp1);
-	free(tmp2);
-	int* top_right = add_square(d, P1, P2);
-	int* bottom_left = add_square(d, P3, P4);
-	tmp1 = add_square(d, P5, P1);
-	tmp2 = sub_square(d, tmp1, P3);
-	int* bottom_right = sub_square(d, tmp2, P7);
-	free(tmp1);
-	free(tmp2);
+	sub_square(d, A, C);
+	add_square(d, E, F);
+	int* P7 = strassen(d, d, A, d, d, E);
 
 	int* c = malloc(sizeof(int) * a_row * a_row);
+
+	int* top_right = add_square(d, P1, P2);
+	int* bottom_left = add_square(d, P3, P4);
+	int* P5_ = add_square(d, P5, sub_square(d, P4, P2));
+	int* top_left = add_square(d, P6, P5_);
+
 	for(int i = 0; i < d; i++){
 		for(int j = 0; j < d; j++){
 			*(c + i * a_row + j) = *(top_left + i * d + j);
@@ -274,11 +245,18 @@ int* strassen(int a_row, int a_col, int* a, int b_row, int b_col, int* b){
 				*(c + i * a_row + j + offsets[1]) = *(top_right + i * d + j);
 			if(!is_odd || (is_odd && i != d - 1))
 				*(c + i * a_row + j + offsets[2]) = *(bottom_left + i * d + j);
+		}
+	}
+
+	// Because of state changes, handle the bottom right separately
+	int* bottom_right = add_square(d, P5_, sub_square(d, sub_square(d, top_right, bottom_left), P7));
+	for(int i = 0; i < d; i++){
+		for(int j = 0; j < d; j++){
 			if(!is_odd || (is_odd && i != d - 1 && j != d - 1))
 				*(c + i * a_row + j + offsets[3]) = *(bottom_right + i * d + j);
 		}
 	}
-
+	
 	free(P1);
 	free(P2);
 	free(P3);
@@ -286,16 +264,9 @@ int* strassen(int a_row, int a_col, int* a, int b_row, int b_col, int* b){
 	free(P5);
 	free(P6);
 	free(P7);
-	free(top_left);
-	free(top_right);
-	free(bottom_left);
-	free(bottom_right);
-	for(int i = 0; i < 8; i++){
-		free(block[i]);
-	}
+	for(int i = 0; i < 8; i++){ free(block[i]); }
 
 	return c;
-
 }
 
 
