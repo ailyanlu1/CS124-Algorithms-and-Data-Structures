@@ -69,11 +69,11 @@ int main(int argc, char* argv[]){
 		free(c);
 		return 1;
 	}
-	print_matrix(dim, dim, c);
-	//print_diagonal(dim, c);
+	//print_matrix(dim, dim, c);
+	print_diagonal(dim, c);
 
 
-	
+	/*
 	int n = cross_over;
 	printf("Crossover = %d\n", cross_over);
 	int trials = 10;
@@ -93,6 +93,7 @@ int main(int argc, char* argv[]){
 		//n <<= 1;
 		n += 1;
 	}
+	*/
 	
 	free(a);
 	free(b);
