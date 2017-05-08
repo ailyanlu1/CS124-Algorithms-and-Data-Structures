@@ -69,7 +69,9 @@ int main(int argc, char* argv[]){
 		free(c);
 		return 1;
 	}
-	//print_matrix(dim, dim, c);
+	// print_matrix(dim, dim, a);
+	// print_matrix(dim, dim, b);
+	// print_matrix(dim, dim, c);
 	print_diagonal(dim, c);
 
 
@@ -94,7 +96,7 @@ int main(int argc, char* argv[]){
 		n += 1;
 	}
 	*/
-	
+
 	free(a);
 	free(b);
 	free(c);

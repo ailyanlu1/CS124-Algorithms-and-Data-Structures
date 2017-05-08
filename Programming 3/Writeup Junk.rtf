@@ -1,0 +1,27 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0  If the sum of all values in the array is odd, return false because it will not be possible to partition subsets of equal size, since the array only contains integers. Given an array of size $n$, if the sum of all values up until $A[i] = i$, then return true. Then if $i=i/2$, function will return true if there are two subsets of equal sum.\
+\
+\\\\\
+Where $T(b,n)$ is return a value whether or not this set can be split into two subsets of sum b with n elements. \
+\\\\\
+$T(b,n-1)$ will return true if there is a sum of i on the 0th to n-1th elements because there must be another subset, not including the last value that will also sum to the same value in order to balance the two sets. $T(b-b_i,n-1)$ will return true if the (sum of all elements) $-$  the first n-th elements $=$ sum of the subset of elements. \\\\\
+This will check to see if any subset can be evaluated to a true value. With n elements and an input of sum b, the runtime is $O(nb)$\
+\\\\\
+\
+In local search algorithms there are several local optima, any of which may get stuck and prevent the algorithm from reaching the global optima.\
+\
+\\\\\
+\
+On average, simulated annealing ran slower than all other algorithms. This is because the analogy of "simulated cooling" where a physical system must be cooled over time, happens very slowly in order to be closest to the optimum residual. Rather than consider every neighbor and immediately improve based on a neighboring value, simulated annealing will only improve on its neighbor with a certain probability. This will require more iterations to compute a residual, but the residual will be less than hill climbing.\
+\
+\\\\\
+\
+################################################################################\
+Essentially if we need to figure out if there's a subset of the first $j$ elements which have subset that sums to $m$, either the first $j-1$ elements could contain such a subset in which case we wouldn't include $A[j]$ in it or the first $j-1$ elements could a subset that sums to $m-A[j]$ and so we should include $A[j]$ in that subset.  If neither of these cases are true, then it isn't possible for there to be a subset of the first $j$ elements with a subset that sums to $m$.  We can build up to $T(\\lceil s/2 \\rceil, n)$ by iterating over an array and storing all these results in a table.  At the end of the process, we check the space that stored $T(\\lceil s/2 \\rceil, n)$ and if it's 1 we return that otherwise decrement the first argument which corresponds to the sum until we encounter a 1 and return that value.  \\\\\
+\
+In order to actually construct the partitions every time we calculate $T(m,j)$ we should include in our array whether or not we've included the $j$th element.  So our table will actually store pairs of truth values that correspond to whether there is a subset of the first $j$ elements which sum to $s$ and whether that sum includes element $j$.  We've shown above how to calculate the first truth value (that corresponds to the 0's and 1's). If $T(m,j)$ is 0, then set the second value to be false also.  If $T(m,j-1)$ is true, then set the second value to false because we can't include $A[j]$ in the sum ($A[j]$ is non zero and positive).  If $T(m-A[j],j-1)$ is true, then we include $A[j]$ and set the second value to true. Now to construct the partition we will basically traverse backwards through the array.  So start with whatever the largest value of $m$ is such that $T(m,n)$ is true.  Then if the $n$th element was included in that subset (which we precomputed) go to $T(m-A[n], n-1)$.  If the $n$th element was not included check what's in $T(m,n-1)$.  Repeat this process until $T(0,0)$ is reached, which must happen because we must have found some partition. }

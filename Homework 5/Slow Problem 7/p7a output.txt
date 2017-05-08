@@ -1,0 +1,23 @@
+Matts-MacBook-Pro-10:Homework 5 Matt$ make p7_a
+cc     p7_a.c   -o p7_a
+Matts-MacBook-Pro-10:Homework 5 Matt$ ./p7_a
+N = 1000000000
+Max bin: 11
+Max bin: 12
+Max bin: 12
+Max bin: 12
+Max bin: 11
+Max bin: 11
+Max bin: 12
+Max bin: 12
+Max bin: 13
+Max bin: 11
+11.700000
+Matts-MacBook-Pro-10:Homework 5 Matt$ 
+
+
+
+
+
+
+

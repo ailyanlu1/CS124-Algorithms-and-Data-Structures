@@ -205,11 +205,11 @@ int main(int argc, char* argv[]){
 	}
 	clock_t end = clock();
 	float time_elapsed = (double)(end - begin) / CLOCKS_PER_SEC;
-	//printf("Avg. weight, Avg. largest edge, numpoints, numtrials, dimension: \n%f, %f, %d, %d, %d\nTime elapsed: %f\n", 
-	//	    (total_weight / (numtrials - failures)), largest_edge / (numtrials - failures), numpoints, numtrials - failures, dimension, time_elapsed);
+	printf("Avg. weight, Avg. largest edge, numpoints, numtrials, dimension: \n%f, %f, %d, %d, %d\nTime elapsed: %f\n", 
+		    (total_weight / (numtrials - failures)), largest_edge / (numtrials - failures), numpoints, numtrials - failures, dimension, time_elapsed);
 	// Numpoints (an int may cause overflow when multiplied by itself - 1)
 
-	printf("%f %d %d %d\n", (total_weight / (numtrials - failures)), numpoints, numtrials - failures, dimension);
+	//printf("%f %d %d %d\n", (total_weight / (numtrials - failures)), numpoints, numtrials - failures, dimension);
 //	numpoints *= 2;
 //}
 	return 0;

@@ -1,0 +1,25 @@
+Matts-MacBook-Pro-10:Homework 5 Matt$ ./p7 1
+N = 1000000000
+Trials = 10
+Max bin: 11
+Max bin: 11
+Max bin: 11
+Max bin: 11
+Max bin: 12
+Max bin: 11
+Max bin: 11
+Max bin: 11
+Max bin: 12
+Max bin: 12
+11.300000
+
+1 & 11 & 4 \\
+2 & 11 & 4 \\
+3 & 11 & 4 \\ 
+4 & 11 & 4 \\
+5 & 12 & 4 \\
+6 & 11 & 4 \\
+7 & 11 & 4 \\
+8 & 11 & 4 \\
+9 & 12 & 4 \\
+10 & 12 & 4 \\
